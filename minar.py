@@ -37,7 +37,7 @@ logging.basicConfig(filename='minar_logs.log', filemode='r+', level="DEBUG", for
 url = "https://github.com/teekar2023/endstone-minar/releases/latest"
 r = requests.get(url, allow_redirects=True)
 redirected_url = r.url
-if redirected_url not "https://github.com/teekar2023/endstone-minar/releases/tag/v1.0":
+if str(redirected_url) != "https://github.com/teekar2023/endstone-minar/releases/tag/v1.0":
     logging.warning("There Is New Update Available")
     input("There Is An Update Available Check Discord And Download It Nigga...")
     exit()
