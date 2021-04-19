@@ -32,22 +32,37 @@ def minar():
     kbm.mouseDown()
 
 
+open("minar_logs.log", "w+")
+logging.basicConfig(filename='minar_logs.log', filemode='r+', level="DEBUG", format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+url = "https://github.com/teekar2023/endstone-minar/releases/latest"
+r = requests.get(url, allow_redirects=True)
+redirected_url = r.url
+if redirected_url not "https://github.com/teekar2023/endstone-minar/releases/tag/v1.0":
+    logging.warning("There Is New Update Available")
+    input("There Is An Update Available Check Discord And Download It Nigga...")
+    exit()
+else:
+    pass
 print("You Have 5 Seconds To Get Back Into Minecraft...")
 time.sleep(5)
 try:
+    logging.info("Starting Threads")
     move_thread = Thread(target=movar)
     move_thread.daemon = True
     move_thread.start()
     mine_thread = Thread(target=minar)
     mine_thread.daemon = True
     mine_thread.start()
+    logging.info("Starting Timar")
     print("timar started")
     num = 810
     for i in range(810):
         time.sleep(1)
         num -= 1
         print(f"Time Left: {str(num)}")
+    logging.info("Timar Ended")
     print("timar ended")
+    logging.warning("Exiting")
     sys.exit()
     exit()
 except Exception as e:
