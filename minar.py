@@ -9,19 +9,20 @@ import sys
 def movar():
     print("movar started")
     kbm.keyDown("shift")
-    interval = float(10)
+    x_interval = float(6)
+    y_interval = float(0.3)
     while True:
         kbm.keyDown("d")
-        time.sleep(interval)
+        time.sleep(x_interval)
         kbm.keyUp("d")
         kbm.keyDown("s")
-        time.sleep(0.1)
+        time.sleep(y_interval)
         kbm.keyUp("s")
         kbm.keyDown("a")
-        time.sleep(interval)
+        time.sleep(x_interval)
         kbm.keyUp("a")
         kbm.keyDown("w")
-        time.sleep(0.1)
+        time.sleep(y_interval)
         kbm.keyUp("w")
 
 
@@ -38,14 +39,15 @@ logging.basicConfig(filename='minar_logs.log', filemode='r+', level="DEBUG", for
 url = "https://github.com/teekar2023/endstone-minar/releases/latest"
 r = requests.get(url, allow_redirects=True)
 redirected_url = r.url
-if str(redirected_url) != "https://github.com/teekar2023/endstone-minar/releases/tag/v1.1":
+if str(redirected_url) != "https://github.com/teekar2023/endstone-minar/releases/tag/v1.3":
     logging.warning("There Is New Update Available")
     input(f"There Is An Update Available Check Discord And Download It Niggar...Or Use This Link: {str(redirected_url)}")
     exit()
 else:
     pass
-print("You Have 5 Seconds To Get Back Into Minecraft...")
-time.sleep(5)
+num = 60 * int(input("How Many Minutes Would You Like To Mine:"))
+print("You Have 10 Seconds To Get Back Into Minecraft And Position Yourself...")
+time.sleep(15)
 try:
     logging.info("Starting Threads")
     move_thread = Thread(target=movar)
@@ -55,15 +57,15 @@ try:
     mine_thread.daemon = True
     mine_thread.start()
     logging.info("Starting Timar")
-    print("timar started")
-    num = 810
+    print("starting timar")
     for i in range(810):
         time.sleep(1)
         num -= 1
-        print(f"Time Left: {str(num)}")
+        print(f"Time Left: {str(num)} Seconds")
     logging.info("Timar Ended")
     print("timar ended")
     logging.warning("Exiting")
+    print("exiting")
     sys.exit()
     exit()
 except Exception as e:
