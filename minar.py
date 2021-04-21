@@ -8,9 +8,10 @@ import sys
 
 def movar():
     print("movar started")
+    logging.info("movar started")
     kbm.keyDown("shift")
     x_interval = float(6)
-    y_interval = float(0.3)
+    y_interval = float(0.5)
     while True:
         kbm.keyDown("d")
         time.sleep(x_interval)
@@ -28,10 +29,8 @@ def movar():
 
 def minar():
     print("minar starter")
+    logging.info("minar started")
     kbm.mouseDown()
-    time.sleep(num)
-    kbm.mouseUp()
-    kbm.keyUp("shift")
 
 
 open("minar_logs.log", "w+")
@@ -39,14 +38,14 @@ logging.basicConfig(filename='minar_logs.log', filemode='r+', level="DEBUG", for
 url = "https://github.com/teekar2023/endstone-minar/releases/latest"
 r = requests.get(url, allow_redirects=True)
 redirected_url = r.url
-if str(redirected_url) != "https://github.com/teekar2023/endstone-minar/releases/tag/v1.3":
+if str(redirected_url) != "https://github.com/teekar2023/endstone-minar/releases/tag/v1.4":
     logging.warning("There Is New Update Available")
     input(f"There Is An Update Available Check Discord And Download It Niggar...Or Use This Link: {str(redirected_url)}")
     exit()
 else:
     pass
-num = 60 * int(input("How Many Minutes Would You Like To Mine:"))
-print("You Have 10 Seconds To Get Back Into Minecraft And Position Yourself...")
+num = 60 * float(input("How Many Minutes Would You Like To Mine For:"))
+print("You Have 10 Seconds To Get Back Into Minecraft And Position Yourself By Looking Straight Down At The Center Of A Block...")
 time.sleep(15)
 try:
     logging.info("Starting Threads")
@@ -58,15 +57,26 @@ try:
     mine_thread.start()
     logging.info("Starting Timar")
     print("starting timar")
-    for i in range(810):
+    for i in range(num):
         time.sleep(1)
         num -= 1
         print(f"Time Left: {str(num)} Seconds")
     logging.info("Timar Ended")
     print("timar ended")
+    logging.info("Stopping Everything")
+    print("Cleaning Up...")
+    kbm.mouseUp()
+    kbm.keyUp("shift")
+    kbm.keyUp("d")
+    kbm.keyUp("a")
+    kbm.keyUp("w")
+    kbm.keyUp("s")
+    time.sleep(5)
     logging.warning("Exiting")
-    print("exiting")
+    print("Exiting...")
+    time.sleep(2)
     sys.exit()
     exit()
 except Exception as e:
-    input(f"Error: {e}")
+    input(f"Error: {e}...Press Enter To Restart Application")
+    os.execl(sys.executable, os.path.abspath(__file__), *sys.argv)
