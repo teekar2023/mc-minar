@@ -66,10 +66,10 @@ try:
 except Exception:
     pass
 logging.basicConfig(filename='minar_logs.log', filemode='r+', level="DEBUG", format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-url = "https://github.com/teekar2023/endstone-minar/releases/latest"
+url = "https://github.com/teekar2023/mc-minar/releases/latest"
 r = requests.get(url, allow_redirects=True)
 redirected_url = r.url
-if str(redirected_url) != "https://github.com/teekar2023/endstone-minar/releases/tag/v2.0":
+if str(redirected_url) != "https://github.com/teekar2023/mc-minar/releases/tag/v2.0":
     logging.warning("There Is A New Update Available")
     print("Press 'ENTER' To Exit...")
     input(f"There Is An Update Available! Please Download It At This Link: {str(redirected_url)}")
